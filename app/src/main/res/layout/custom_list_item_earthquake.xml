@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:padding="@dimen/padding_normal">
+
+    <TextView
+        android:id="@+id/ctm_item_earthquake_txt_magnitude"
+        style="@style/custom_item_earthquake"/>
+
+
+    <TextView
+        android:id="@+id/ctm_item_earthquake_txt_location"
+        style="@style/custom_item_earthquake"/>
+
+
+    <TextView
+        android:id="@+id/ctm_item_earthquake_txt_date"
+        style="@style/custom_item_earthquake"/>
+
+</LinearLayout>
