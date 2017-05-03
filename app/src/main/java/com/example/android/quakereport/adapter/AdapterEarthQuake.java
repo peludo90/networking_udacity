@@ -48,9 +48,9 @@ public class AdapterEarthquake extends ArrayAdapter<Earthquake> {
 
         Earthquake earthQuake = earthQuakes.get(position);
         if (earthQuake != null) {
-            viewHolder.txtMagnitude.setText(earthQuake.getMagnitude());
-            viewHolder.txtLocation.setText(earthQuake.getLocation());
-            viewHolder.txtDate.setText(earthQuake.getDate());
+            viewHolder.txtMagnitude.setText(String.valueOf(earthQuake.getMagnitude()));
+            viewHolder.txtLocation.setText(earthQuake.getCity());
+            viewHolder.txtDate.setText(earthQuake.getDateFormatted());
         }
 
         return convertView;

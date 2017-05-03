@@ -1,26 +1,31 @@
 package com.example.android.quakereport.entity;
 
+import com.example.android.quakereport.utils.DateUtils;
+
 /**
  * Created by obed.gonzalez on 20/04/2017.
  */
 
 public class Earthquake {
 
-    private String magnitude;
+    private double magnitude;
     private String location;
-    private String date;
+    private long date;
 
-    public Earthquake(String magnitude, String location, String date) {
+    public Earthquake() {
+    }
+
+    public Earthquake(double magnitude, String location, long date) {
         this.magnitude = magnitude;
         this.location = location;
         this.date = date;
     }
 
-    public String getMagnitude() {
+    public double getMagnitude() {
         return magnitude;
     }
 
-    public void setMagnitude(String magnitude) {
+    public void setMagnitude(double magnitude) {
         this.magnitude = magnitude;
     }
 
@@ -32,11 +37,25 @@ public class Earthquake {
         this.location = location;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
+    }
+
+    public String getDateFormatted() {
+        return DateUtils.getDateString(date, DateUtils.FECHA_DIAMESANIO_12HORA_AMPM);
+    }
+
+    public String getCity() {
+        if (location.contains(" of ")) {
+            String[] split = location.split(" of ");
+            return split[split.length - 1];
+        } else {
+            return location;
+        }
+
     }
 }
