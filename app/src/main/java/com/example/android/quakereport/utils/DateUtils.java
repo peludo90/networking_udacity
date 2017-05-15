@@ -21,7 +21,7 @@ public class DateUtils {
     public static final String FORMAT_ANIO_MES_DIA = "yyyy-MM-dd";
     public static final String COMPL_TIME_CEROS = " 00:00:00";
     public static final String FORMAT_SOLONUMS = "yyyyMMdd";
-    public static final String FECHA_DIAMESANIO_12HORA_AMPM = "dd/MM/yyyy hh:mm a";
+    public static final String FECHA_DIAMESANIO_12HORA_AMPM = "MMM dd,yyyy\nh:mm a";
 
     public static String getDateString(long longDate, String format) {
 
