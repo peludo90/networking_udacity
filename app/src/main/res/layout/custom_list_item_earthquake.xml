@@ -1,27 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:padding="@dimen/padding_normal">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:padding="@dimen/padding_normal">
 
     <TextView
         android:id="@+id/ctm_item_earthquake_txt_magnitude"
-        style="@style/custom_item_earthquake"
-        android:gravity="center_vertical" />
+        android:layout_width="@dimen/circle_diameter"
+        android:layout_height="@dimen/circle_diameter"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/magnitude_circle"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_normal"
+        tools:text="8.9"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/ctm_item_earthquake_txt_location"
-        style="@style/custom_item_earthquake"
-        android:layout_weight="2"
-        android:gravity="start|center_vertical" />
+        <TextView
+            android:id="@+id/ctm_item_earthquake_txt_location_offset"
+            style="@style/wrapwrap"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textAllCaps="true"
+            android:textColor="@color/textColorEarthquakeDetails"
+            android:textSize="@dimen/text_size_small"
+            tools:text="30km S of"/>
 
+
+        <TextView
+            android:id="@+id/ctm_item_earthquake_txt_primary_location"
+            style="@style/wrapwrap"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/textColorEarthquakeLocation"
+            android:textSize="@dimen/text_size_normal"
+            tools:text="Long placeholder location that should wrap to more than 2 lines of text"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/ctm_item_earthquake_txt_date"
-        style="@style/custom_item_earthquake"
-        android:layout_weight="2"
-        android:gravity="end|center_vertical" />
+        style="@style/wrapwrap"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:gravity="end"
+        android:textColor="@color/textColorEarthquakeDetails"
+        android:textSize="@dimen/text_size_small"/>
 
 </LinearLayout>

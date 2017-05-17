@@ -68,6 +68,8 @@ public final class QueryUtils {
                         jsonPropeties.getString("place"),
                         jsonPropeties.getLong("time"));
 
+                earthquake.setUrl(jsonPropeties.getString("url"));
+
                 earthquakes.add(earthquake);
             }
 

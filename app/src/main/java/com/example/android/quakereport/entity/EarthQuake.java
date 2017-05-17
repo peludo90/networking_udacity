@@ -11,6 +11,7 @@ public class Earthquake {
     private double magnitude;
     private String location;
     private long date;
+    private String url;
 
     public Earthquake() {
     }
@@ -45,17 +46,16 @@ public class Earthquake {
         this.date = date;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getDateFormatted() {
         return DateUtils.getDateString(date, DateUtils.FECHA_DIAMESANIO_12HORA_AMPM);
     }
 
-    public String getCity() {
-        if (location.contains(" of ")) {
-            String[] split = location.split(" of ");
-            return split[split.length - 1];
-        } else {
-            return location;
-        }
-
-    }
 }
