@@ -23,8 +23,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.android.quakereport.adapter.AdapterEarthquake;
-import com.example.android.quakereport.entity.Earthquake;
+import com.example.android.quakereport.adapter.AdapterEarthQuake;
+import com.example.android.quakereport.entity.EarthQuake;
 import com.example.android.quakereport.utils.QueryUtils;
 
 import java.util.ArrayList;
@@ -39,13 +39,13 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        final ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
+        final ArrayList<EarthQuake> earthQuakes = QueryUtils.extractEarthquakes();
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
 
-        // Create a new {@link ArrayAdapter} of earthquakes
-        AdapterEarthquake adapter = new AdapterEarthquake(this, earthquakes);
+        // Create a new {@link ArrayAdapter} of earthQuakes
+        AdapterEarthQuake adapter = new AdapterEarthQuake(this, earthQuakes);
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
@@ -56,7 +56,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(earthquakes.get(position).getUrl()));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(earthQuakes.get(position).getUrl()));
                 startActivity(browserIntent);
             }
         });

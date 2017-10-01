@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.android.quakereport.R;
-import com.example.android.quakereport.entity.Earthquake;
+import com.example.android.quakereport.entity.EarthQuake;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -20,13 +20,13 @@ import java.util.List;
  * Created by obed.gonzalez on 20/04/2017.
  */
 
-public class AdapterEarthquake extends ArrayAdapter<Earthquake> {
+public class AdapterEarthQuake extends ArrayAdapter<EarthQuake> {
 
-    private List<Earthquake> earthQuakes;
+    private List<EarthQuake> earthQuakes;
     private Context context;
     private DecimalFormat formatter;
 
-    public AdapterEarthquake(Context context, List<Earthquake> earthQuakes) {
+    public AdapterEarthQuake(Context context, List<EarthQuake> earthQuakes) {
         super(context, 0, earthQuakes);
         this.earthQuakes = earthQuakes;
         this.context = context;
@@ -52,7 +52,7 @@ public class AdapterEarthquake extends ArrayAdapter<Earthquake> {
             viewHolder = (ViewHolder) mConvertView.getTag();
         }
 
-        Earthquake earthQuake = earthQuakes.get(position);
+        EarthQuake earthQuake = earthQuakes.get(position);
         if (earthQuake != null) {
 
             GradientDrawable magnitudeCircle = (GradientDrawable)  viewHolder.txtMagnitude.getBackground();

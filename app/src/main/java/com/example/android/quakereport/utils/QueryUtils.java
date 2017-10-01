@@ -7,7 +7,7 @@ package com.example.android.quakereport.utils;
 
 import android.util.Log;
 
-import com.example.android.quakereport.entity.Earthquake;
+import com.example.android.quakereport.entity.EarthQuake;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,13 +43,13 @@ public final class QueryUtils {
     }
 
     /**
-     * Return a list of {@link Earthquake} objects that has been built up from
+     * Return a list of {@link EarthQuake} objects that has been built up from
      * parsing a JSON response.
      */
-    public static ArrayList<Earthquake> extractEarthquakes() {
+    public static ArrayList<EarthQuake> extractEarthquakes() {
 
-        // Create an empty ArrayList that we can start adding earthquakes to
-        ArrayList<Earthquake> earthquakes = new ArrayList<>();
+        // Create an empty ArrayList that we can start adding earthQuakes to
+        ArrayList<EarthQuake> earthQuakes = new ArrayList<>();
 
         // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
@@ -64,13 +64,13 @@ public final class QueryUtils {
                 JSONObject jsonEarthquake = jsonArray.getJSONObject(i);
                 JSONObject jsonPropeties = jsonEarthquake.getJSONObject("properties");
 
-                Earthquake earthquake = new Earthquake(jsonPropeties.getDouble("mag"),
+                EarthQuake earthQuake = new EarthQuake(jsonPropeties.getDouble("mag"),
                         jsonPropeties.getString("place"),
                         jsonPropeties.getLong("time"));
 
-                earthquake.setUrl(jsonPropeties.getString("url"));
+                earthQuake.setUrl(jsonPropeties.getString("url"));
 
-                earthquakes.add(earthquake);
+                earthQuakes.add(earthQuake);
             }
 
 
@@ -81,8 +81,8 @@ public final class QueryUtils {
             Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
         }
 
-        // Return the list of earthquakes
-        return earthquakes;
+        // Return the list of earthQuakes
+        return earthQuakes;
     }
 
 }

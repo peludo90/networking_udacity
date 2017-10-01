@@ -6,17 +6,17 @@ import com.example.android.quakereport.utils.DateUtils;
  * Created by obed.gonzalez on 20/04/2017.
  */
 
-public class Earthquake {
+public class EarthQuake {
 
     private double magnitude;
     private String location;
     private long date;
     private String url;
 
-    public Earthquake() {
+    public EarthQuake() {
     }
 
-    public Earthquake(double magnitude, String location, long date) {
+    public EarthQuake(double magnitude, String location, long date) {
         this.magnitude = magnitude;
         this.location = location;
         this.date = date;
