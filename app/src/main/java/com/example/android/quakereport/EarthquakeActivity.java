@@ -19,19 +19,34 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.quakereport.adapter.AdapterEarthQuake;
+import com.example.android.quakereport.data.EarthquakeService;
 import com.example.android.quakereport.entity.EarthQuake;
+import com.example.android.quakereport.entity.EarthquakeQuery;
+import com.example.android.quakereport.utils.AppConstants;
 import com.example.android.quakereport.utils.QueryUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EarthquakeActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
+    List<EarthQuake> earthQuakes = null;
+    ListView earthquakeListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +54,57 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        final ArrayList<EarthQuake> earthQuakes = QueryUtils.extractEarthquakes();
+        earthquakeListView = (ListView) findViewById(R.id.list);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstants.Network.BASE_URL_EARTHQUAKE)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+
+        EarthquakeService earthquakeService = retrofit.create(EarthquakeService.class);
+
+        Map<String, String> paramMap = new HashMap<>();
+
+        paramMap.put(AppConstants.Network.PARAM_FORMAT, AppConstants.Network.PARAM_FORMAT_JSON);
+        paramMap.put(AppConstants.Network.PARAM_START_TIME, "2017-01-01");
+        paramMap.put(AppConstants.Network.PARAM_END_TIME, "2017-03-01");
+
+
+        Call<EarthquakeQuery> call = earthquakeService.getQuery(paramMap);
+
+        call.enqueue(new Callback<EarthquakeQuery>() {
+            @Override
+            public void onResponse(Call<EarthquakeQuery> call, Response<EarthquakeQuery> response) {
+                if (response != null) {
+                    try {
+                        earthQuakes = response.body().getFeatures();
+
+
+                        // Create a new {@link ArrayAdapter} of earthQuakes
+                        AdapterEarthQuake adapter = new AdapterEarthQuake(EarthquakeActivity.this, earthQuakes);
+
+                        // Set the adapter on the {@link ListView}
+                        // so the list can be populated in the user interface
+                        earthquakeListView.setAdapter(adapter);
+                    } catch (NullPointerException e) {
+                        Log.e(LOG_TAG, "Error", e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EarthquakeQuery> call, Throwable t) {
+
+            }
+        });
+
 
         // Find a reference to the {@link ListView} in the layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
-
-        // Create a new {@link ArrayAdapter} of earthQuakes
-        AdapterEarthQuake adapter = new AdapterEarthQuake(this, earthQuakes);
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        earthquakeListView.setAdapter(adapter);
 
 
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(earthQuakes.get(position).getUrl()));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(earthQuakes.get(position).getProperties().getUrl()));
                 startActivity(browserIntent);
             }
         });

@@ -57,16 +57,16 @@ public class AdapterEarthQuake extends ArrayAdapter<EarthQuake> {
 
             GradientDrawable magnitudeCircle = (GradientDrawable)  viewHolder.txtMagnitude.getBackground();
             // Get the appropriate background color based on the current earthquake magnitude
-            int magnitudeColor = getMagnitudeColor(earthQuake.getMagnitude());
+            int magnitudeColor = getMagnitudeColor(earthQuake.getProperties().getMagnitude());
             // Set the color on the magnitude circle
             magnitudeCircle.setColor(magnitudeColor);
 
-            viewHolder.txtMagnitude.setText(formatter.format(earthQuake.getMagnitude()));
+            viewHolder.txtMagnitude.setText(formatter.format(earthQuake.getProperties().getMagnitude()));
 
 
             viewHolder.txtDate.setText(earthQuake.getDateFormatted());
 
-            String location = earthQuake.getLocation();
+            String location = earthQuake.getProperties().getLocation();
 
             if (location.contains(" of ")) {
                 /*String[] split = location.split(" of ");

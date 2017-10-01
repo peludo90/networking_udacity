@@ -8,54 +8,46 @@ import com.example.android.quakereport.utils.DateUtils;
 
 public class EarthQuake {
 
-    private double magnitude;
-    private String location;
-    private long date;
-    private String url;
+    private String type;
+    private Properties properties;
+    private Geometry geometry;
 
     public EarthQuake() {
     }
 
     public EarthQuake(double magnitude, String location, long date) {
-        this.magnitude = magnitude;
-        this.location = location;
-        this.date = date;
+        properties = new Properties();
+        properties.setMagnitude(magnitude);
+        properties.setLocation(location);
+        properties.setDate(date);
     }
 
-    public double getMagnitude() {
-        return magnitude;
+    public String getType() {
+        return type;
     }
 
-    public void setMagnitude(double magnitude) {
-        this.magnitude = magnitude;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getLocation() {
-        return location;
+    public Properties getProperties() {
+        return properties;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setProperties(Properties properties) {
+        this.properties = properties;
     }
 
-    public long getDate() {
-        return date;
+    public Geometry getGeometry() {
+        return geometry;
     }
 
-    public void setDate(long date) {
-        this.date = date;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setGeometry(Geometry geometry) {
+        this.geometry = geometry;
     }
 
     public String getDateFormatted() {
-        return DateUtils.getDateString(date, DateUtils.FECHA_DIAMESANIO_12HORA_AMPM);
+        return DateUtils.getDateString(properties.getDate(), DateUtils.FECHA_DIAMESANIO_12HORA_AMPM);
     }
 
 }

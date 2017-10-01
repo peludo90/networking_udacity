@@ -68,7 +68,7 @@ public final class QueryUtils {
                         jsonPropeties.getString("place"),
                         jsonPropeties.getLong("time"));
 
-                earthQuake.setUrl(jsonPropeties.getString("url"));
+                earthQuake.getProperties().setUrl(jsonPropeties.getString("url"));
 
                 earthQuakes.add(earthQuake);
             }
